@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 void PlayGame(){ // Starts the game
     int gameBoard[8][8];
@@ -20,6 +21,14 @@ void PlayGame(){ // Starts the game
     getUserInputFromMe(gameBoard,backGameBoard);
     printf("\n");
     computerRandInput(myGameBoard);
+    shipExists(gameBoard);
+    shipExists(myGameBoard);
+    while(shipExists(gameBoard) && shipExists(myGameBoard)){
+        getUserInputFromMe(gameBoard,backGameBoard);
+        computerRandInput(myGameBoard);
+    }
+   Winner( myGameBoard,gameBoard);
+
 }
 
 // Print board with an array full of zeros
@@ -48,7 +57,8 @@ void printBoard2( int gameBoard2[8][8]){
         printf("\n");
     }
 }
-// Creating a game board for the player
+
+// Creating a game board for the player 
 void printBoard3( int myGameBoard[8][8]){
     int row = 8;
     int col = 8;
@@ -60,7 +70,7 @@ void printBoard3( int myGameBoard[8][8]){
     }
 }
 
-/* Print out the computer random board but don't show it's values.*/
+/* Print out the computer random board and enter the values in the hidden gameBoard.*/
 
 void computerRandBoard(int gameBoard[8][8], int backGameBoard[8][8]){
     int row = 8;
@@ -105,7 +115,7 @@ void computerRandBoard(int gameBoard[8][8], int backGameBoard[8][8]){
 
 }
 
-// Print out my game board and show it's values
+// Print out MY GAME BOARD and show it's values
 
 void myRandBoard(int myGameBoard[8][8]){
     int row = 8;
@@ -149,7 +159,7 @@ void myRandBoard(int myGameBoard[8][8]){
 
 }
 
-// Get my X and Y coordinates!
+// Get my X and Y coordinates! If it hit then the 1 value turns into an 8 and if it misses that 0 value turns into a 4.
 
 void getUserInputFromMe(int gameBoard[8][8],int backGameBoard[8][8]){
     int l;
@@ -211,10 +221,24 @@ void computerRandInput( int myGameBoard[8][8]){
 
 }
 
+//Check if a ship exist which if there is a 1 in the array and if it there is return a true value.
 
+bool shipExists(int boardToCheck[8][8]){
+    int row = 8;
+    int col = 8;
 
-void loopTheInputFunctions(){
-    while()
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            if(boardToCheck[i][j] == 1){
+               return true;
+            }else{
+                return false;
+            }
+            return false;
+        }
+        return false;
+        printf("\n");
+    }
 }
 
 
@@ -247,9 +271,7 @@ void Winner(int myGameBoard[8][8], int gameBoard[8][8]) {
 
 
 
-//void restart(){
-//
-//}
+
 
 
 
